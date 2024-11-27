@@ -50,7 +50,16 @@ class ModelView() : ViewModel() {
 
 
 
-
+    /**
+     * Función que finaliza el juego.
+     * Cambia el estado a PERDIDO y muestra un mensaje en la pantalla.
+     */
+    fun endGame() {
+        estadoLiveData.value = Estados.PERDIDO
+        mensajeC.value = "Perdiste"
+        Datos.ronda.value = 0
+        Log.d(TAG_LOG, "Estado: ${estadoLiveData.value}")
+    }
 
     /**
      * Función que retorna una lista de botones.
