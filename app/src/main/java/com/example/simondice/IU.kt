@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 
@@ -31,7 +32,31 @@ fun IU(viewModel: ModelView) {
     val estado by viewModel.estadoLiveData.observeAsState(Estados.INICIO)
     val ronda by Datos.ronda.observeAsState(0) // Observa el LiveData de ronda
 
+
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        //Si el estado es Perdido visualizamos por pantalla Perdiste
+        if (estado == Estados.PERDIDO) {
+            Text(
+                text = "Perdiste",
+                color = Color.Black,
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+        // Si seguimos acertando se va sumando una ronda al total de ronda esto lo visualizamos
+        Text(
+            text = "Ronda: $ronda",
+            color = Color.Black,
+            modifier = Modifier.padding(16.dp)
+        )
+        // Se muestran los botones de colores y el botón de inicio
+        Botones(viewModel, estado, TAG_LOG)
+        Boton_Start(viewModel, estado)
+    }
 }
+
 
 /**
  * Función que se encarga de mostrar los botones de colores de la aplicación
