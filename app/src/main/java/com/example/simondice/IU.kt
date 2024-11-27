@@ -31,3 +31,61 @@ fun IU(viewModel: ModelView) {
     val ronda by Datos.ronda.observeAsState(0) // Observa el LiveData de ronda
 
 }
+
+/**
+ * Función que se encarga de mostrar los botones de colores de la aplicación
+ * @param viewModel Modelo de la vista
+ * @param estado Estado del juego
+ * @param TAG_LOG Etiqueta para el log
+ */
+@Composable
+fun Botones(viewModel: ModelView, estado: Estados, TAG_LOG: String) {
+    val buttons = viewModel.getButtons()
+    val mensajeC by viewModel.mensajeC
+    var iluminado by remember { mutableStateOf<ColorButton?>(null) }
+
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        // Se recorre la lista de botones y se muestran en la pantalla
+        buttons.chunked(2).forEach { rowButtons ->
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                rowButtons.forEach { buttonData ->
+                    // Se comprueba si el botón está iluminado
+                    val isIlluminated = mensajeC == buttonData.colorButton.label || iluminado == buttonData.colorButton
+                    Button(
+                        onClick = {
+                            if (estado == Estados.ADIVINANDO) {
+                                Log.d(TAG_LOG, buttonData.colorButton.label)
+                                iluminado = buttonData.colorButton
+                                val isCorrect = viewModel.compararColorSeleccionado(buttonData.colorButton)
+                                if (!isCorrect) {
+                                    viewModel.endGame()
+                                }
+                            }
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = if (isIlluminated) buttonData.colorButton.color.copy(alpha = 0.5f) else buttonData.colorButton.color
+                        ),
+                        modifier = Modifier
+                            .padding(5.dp)
+                            .size(width = 180.dp, height = 180.dp),
+                    ) {
+                    }
+                    // Se ilumina el botón durante 500ms
+                    if (iluminado == buttonData.colorButton) {
+                        LaunchedEffect(iluminado) {
+                            delay(500)
+                            iluminado = null
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
