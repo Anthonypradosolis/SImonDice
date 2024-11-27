@@ -82,6 +82,30 @@ class ModelView() : ViewModel() {
     }
 
 
+    /**
+     * Función que compara el color seleccionado con el color de la secuencia de colores
+     * Y cambia el estado del juego.
+     * Finamente llama al metodo agregarColorASecuencia() para agregar un color a la secuencia de colores
+     * Si el color seleccionado es igual al color de la secuencia de colores se incrementa el indiceActual
+     * Si el indiceActual es igual al tamaño de la secuencia de colores se cambia el estado a GENERANDO
+     * Si el color seleccionado es diferente al color de la secuencia de colores se llama al metodo endGame()
+     */
+    fun compararColorSeleccionado(colorSeleccionado: ColorButton): Boolean {
+        if (colorSeleccionado == secuenciaColores[indiceActual]) {
+            indiceActual++
+            if (indiceActual == secuenciaColores.size) {
+                estadoLiveData.value = Estados.GENERANDO
+                viewModelScope.launch {
+                    delay(1500)
+                    agregarColorASecuencia()
+                }
+            }
+            return true
+        } else {
+            endGame()
+            return false
+        }
+    }
 
 
     /**
