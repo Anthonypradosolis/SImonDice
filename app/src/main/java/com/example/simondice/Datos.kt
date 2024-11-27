@@ -24,3 +24,11 @@ enum class ColorButton(val color: Color, val label: String, val value: Int) {
     AMARILLO(Color.Yellow, "Amarillo", 3),
     AZUL(Color.Blue, "Azul", 4)
 }
+
+
+/**
+ * Clase ButtonData que se encarga de almacenar los datos de los botones
+ * @param colorButton Color del botón
+ */
+data class ButtonData(val colorButton: ColorButton )
+
