@@ -4,6 +4,9 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * Clase ModelView que se encarga de manejar la lógica de la aplicación.
@@ -46,6 +49,25 @@ class ModelView() : ViewModel() {
 
 
 
+
+    /**
+     * Función que muestra la secuencia de colores.
+     * Muestra un color por pantalla y lo oculta.
+     * Luego cambia el estado a ADIVINANDO.
+     */
+    private fun mostrarSecuencia() {
+        viewModelScope.launch {
+            for (color in secuenciaColores) {
+                mensajeC.value = color.label
+                delay(500)
+                mensajeC.value = ""
+                delay(500)
+            }
+            delay(500)
+            estadoLiveData.value = Estados.ADIVINANDO
+            indiceActual = 0
+        }
+    }
 
 
 
