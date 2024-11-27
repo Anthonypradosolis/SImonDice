@@ -32,3 +32,16 @@ enum class ColorButton(val color: Color, val label: String, val value: Int) {
  */
 data class ButtonData(val colorButton: ColorButton )
 
+/**
+ * Enumeración de los estados del juego
+ * @param value Valor del estado
+ * @param label Etiqueta del estado
+ */
+enum class Estados (val value: Int, val label: String) {
+    INICIO(0, "Inicio"),
+    GENERANDO(1, "Generando"),
+    ADIVINANDO(2, "Adivinando"),
+    PERDIDO(3, "Perdido")
+
+
+}
