@@ -52,5 +52,14 @@ class ModelView() : ViewModel() {
 
 
 
-
+    /**
+     * Función que retorna una lista de botones.
+     */
+    fun getButtons(): List<ButtonData> {
+        return listOf(
+            ButtonData(ColorButton.VERDE),
+            ButtonData(ColorButton.ROJO),
+            ButtonData(ColorButton.AMARILLO),
+            ButtonData(ColorButton.AZUL))
+    }
 }
