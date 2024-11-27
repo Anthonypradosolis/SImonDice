@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -87,5 +88,26 @@ fun Botones(viewModel: ModelView, estado: Estados, TAG_LOG: String) {
                 }
             }
         }
+    }
+}
+
+
+/**
+ * Función que se encarga de mostrar el botón de inicio de la aplicación
+ * @param viewModel Modelo de la vista
+ * @param estado Estado del juego
+ */
+@Composable
+fun Boton_Start(viewModel: ModelView, estado: Estados) {
+    Button(
+        onClick = {
+            viewModel.empezarJugar()
+        },
+        modifier = Modifier
+            .padding(5.dp)
+            .size(width = 180.dp, height = 50.dp),
+        enabled = estado == Estados.INICIO || estado == Estados.PERDIDO
+    ) {
+        Text("Start")
     }
 }
