@@ -34,6 +34,14 @@ class ModelView() : ViewModel() {
     //Variable(indiceActual) que almacena el índice actual de la secuencia de colores
     private var indiceActual = 0
 
+    /**
+     * Inicialización de la clase ModelView.
+     * Se inicializa el estado del juego y se obtienen los botones.
+     */
+    init {
+        Log.d(TAG_LOG,"Estado: ${estadoLiveData.value}")
+        buttons.value = getButtons()
+    }
 
 
 
