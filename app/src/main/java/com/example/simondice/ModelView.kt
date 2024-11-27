@@ -47,6 +47,16 @@ class ModelView() : ViewModel() {
     }
 
 
+    /**
+     * Función que empieza el juego.
+     * LLama al metodo  agregarColorASecuencia() para agregar un color a la secuencia de colores.
+     */
+    fun empezarJugar() {
+        estadoLiveData.value = Estados.GENERANDO
+        secuenciaColores.clear()
+        agregarColorASecuencia()
+    }
+
 
     /**
      * Función que agrega un color a la secuencia de colores.
