@@ -48,6 +48,18 @@ class ModelView() : ViewModel() {
 
 
 
+    /**
+     * Función que agrega un color a la secuencia de colores.
+     * Este metodo esta dentro del metodo empezarJugar() y se llama cada vez que se inicia el juego.
+     * Tambien llama al metodo mostrarSecuncia dentro de este metodo
+     */
+    fun agregarColorASecuencia() {
+        val randomButtonIndex = (1..4).random()
+        val nuevoColor = ColorButton.values().first { it.value == randomButtonIndex }
+        secuenciaColores.add(nuevoColor)
+        Datos.ronda.value = Datos.ronda.value?.plus(1) // Incrementa la ronda
+        mostrarSecuencia()
+    }
 
 
     /**
